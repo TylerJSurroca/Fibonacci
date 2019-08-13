@@ -52,13 +52,42 @@ int getTheFibonacciNumberArray(int theFibNumberThatWeWant)
     if(theFibNumberThatWeWant > 19)
     {
         printf("ERROR: NUMBER NOT AVAILABLE\n");
-        return NULL;
+        return NULL;if(theFibNumberThatWeWant == 0)
+        return 0;
+    if(theFibNumberThatWeWant == 1)
+        return 1;
+    if(theFibNumberThatWeWant == 2)
+        return 1;
     }
     else
     {
         return(fibSeq[theFibNumberThatWeWant]);
     }
 
+}
+
+unsigned long long getTheFibonacciNumberUsingFor(int theFibNumberThatWeWant)
+{
+    int counter;
+    unsigned long long num1 = 0;
+    unsigned long long num2 = 1;
+    unsigned long long result;
+
+    if(theFibNumberThatWeWant == 0)
+        return 0;
+    if(theFibNumberThatWeWant == 1)
+        return 1;
+    if(theFibNumberThatWeWant == 2)
+        return 1;
+
+    for(counter = 2; counter <= theFibNumberThatWeWant; counter++)
+    {
+        result = num1 + num2;
+        num1 = num2;
+        num2 = result;
+    }
+
+    return result;
 }
 
 int main()
@@ -72,22 +101,29 @@ int main()
     scanf("%d",&userInput);
 
     start = clock();
-    returnValue = getTheFibonacciNumberMemoization(userInput-1);
+    returnValue = getTheFibonacciNumberMemoization(userInput);
     printf("Your Fibonacci number through Memoization is: %llu\n",returnValue);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Time Taken: %lf seconds\n",cpu_time_used);
 
     start = clock();
-    returnValue = getTheFibonacciNumberArray(userInput-1);
+    returnValue = getTheFibonacciNumberArray(userInput);
     printf("Your Fibonacci number through an Array is: %d\n",returnValue);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Time Taken: %lf seconds\n",cpu_time_used);
 
     start = clock();
-    returnValue = getTheFibonacciNumberRecursive(userInput-1);
+    returnValue = getTheFibonacciNumberRecursive(userInput);
     printf("Your Fibonacci number through Recursion is: %llu\n",returnValue);
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time Taken: %lf seconds\n",cpu_time_used);
+
+    start = clock();
+    returnValue = getTheFibonacciNumberUsingFor(userInput);
+    printf("Your Fibonacci number through For Looping is: %llu\n",returnValue);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Time Taken: %lf seconds\n",cpu_time_used);
